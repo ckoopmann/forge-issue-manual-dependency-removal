@@ -35,6 +35,7 @@ jobs:
 
       - name: Mess up even more by removing lib/forge-std from the staging area
         run: git add lib/forge-std
+        if: always()
 
       - name: Try to remove
         run: forge remove lib/forge-std
