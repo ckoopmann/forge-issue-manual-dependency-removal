@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: true
 
-    name: Foundry project
+    name: Reproduce issue on macos12
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v3
@@ -33,6 +33,10 @@ jobs:
       - name: Try to reinstall
         run: forge install --no-commit foundry-rs/forge-std
         if: always()
+
+      - name: Mess up even more by removing lib/forge-std from the staging area
+        run: git add lib/forge-std
+        id: manual-removal
 
       - name: Try to remove
         run: forge remove lib/forge-std
