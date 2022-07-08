@@ -1,0 +1,44 @@
+name: test
+
+on:
+  push:
+
+env:
+  FOUNDRY_PROFILE: ci
+
+jobs:
+  foundry:
+    strategy:
+      fail-fast: true
+
+    name: Foundry project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Install forge-std
+        run: forge install --no-commit foundry-rs/forge-std
+
+      - name: Mess up by manually removing the lib/forge-std directory
+        run: rm -rf lib/forge-std
+        id: manual-removal
+
+      - name: Try to reinstall
+        run: forge install --no-commit foundry-rs/forge-std
+        if: always()
+
+      - name: Try to remove
+        run: forge remove lib/forge-std
+        if: always()
+
+      - name: Try to update
+        run: forge update lib/forge-std
+        if: always()
+
