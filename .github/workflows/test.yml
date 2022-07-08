@@ -28,7 +28,6 @@ jobs:
 
       - name: Mess up by manually removing the lib/forge-std directory
         run: rm -rf lib/forge-std
-        id: manual-removal
 
       - name: Try to reinstall
         run: forge install --no-commit foundry-rs/forge-std
@@ -36,7 +35,6 @@ jobs:
 
       - name: Mess up even more by removing lib/forge-std from the staging area
         run: git add lib/forge-std
-        id: manual-removal
 
       - name: Try to remove
         run: forge remove lib/forge-std
