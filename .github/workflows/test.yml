@@ -7,12 +7,12 @@ env:
   FOUNDRY_PROFILE: ci
 
 jobs:
-  foundry:
+  reproduce-on-mac:
     strategy:
       fail-fast: true
 
     name: Foundry project
-    runs-on: ubuntu-latest
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v3
         with:
